@@ -1,23 +1,23 @@
-# 🚀 AI News Aggregator
+
+
+# 🚀 AI News Aggregator (Powered by Groq)
 
 ## 📌 Overview
 
-AI News Aggregator is a powerful Python-based application that automatically collects, processes, and summarizes news from multiple sources using Artificial Intelligence.
+AI News Aggregator is a production-style Python application that automatically collects, processes, and summarizes news using high-speed AI inference powered by **Groq API**.
 
-This project is designed to simulate a real-world production pipeline where data is fetched, cleaned, processed, and enhanced using AI models to generate meaningful insights.
-
-It helps developers understand how to build **AI-powered automation systems**, including scraping, parsing, summarization, and pipeline orchestration.
+This project demonstrates how to build a **real-world AI data pipeline**, combining scraping, processing, and LLM-based summarization into a fully automated system.
 
 ---
 
 ## 🎯 What This Project Does
 
-* 📰 Collects news from multiple sources (RSS feeds, APIs, websites)
-* 🧹 Cleans and processes raw article content
-* 🤖 Uses OpenAI to summarize and enhance readability
-* 📊 Filters top news based on relevance
-* ⏱ Supports time-based filtering (e.g., last 24 hours)
-* 🔄 Runs as an automated pipeline
+* 📰 Aggregates news from RSS feeds and external sources
+* 🧹 Cleans and extracts meaningful article content
+* ⚡ Uses Groq LLMs for ultra-fast summarization
+* 📊 Filters top news based on recency & relevance
+* ⏱ Supports time-based queries (e.g., last 24 hours)
+* 🔄 Runs as a fully automated pipeline
 
 ---
 
@@ -25,33 +25,38 @@ It helps developers understand how to build **AI-powered automation systems**, i
 
 ### 📰 News Collection
 
-* Fetches news from RSS feeds using `feedparser`
-* Can be extended to APIs and scraping sources
+* Fetches data from RSS feeds using `feedparser`
+* Easily extendable to APIs and web scraping
 
 ### 🧹 Data Processing
 
-* Extracts clean text from HTML using `BeautifulSoup`
-* Removes noise, ads, and unnecessary content
+* Uses `BeautifulSoup` to clean HTML
+* Removes ads, scripts, and noise
+* Converts content into structured format
 
-### 🤖 AI Summarization
+### ⚡ AI Summarization (Groq Powered)
 
-* Uses OpenAI API to:
+* Uses Groq’s ultra-fast inference API
+* Performs:
 
-  * Summarize articles
-  * Improve readability
-  * Generate structured outputs
+  * News summarization
+  * Readability enhancement
+  * Structured output generation
 
 ### 📊 Smart Filtering
 
-* Filters top N news articles
-* Based on recency and importance
+* Filters top N articles
+* Based on:
+
+  * Recency
+  * Content importance
 
 ### ⚙️ Configurable Pipeline
 
-* Customizable parameters:
+* Adjustable parameters:
 
   * Time range (hours)
-  * Number of top articles
+  * Number of articles
 
 ---
 
@@ -63,14 +68,14 @@ It helps developers understand how to build **AI-powered automation systems**, i
 
 ### 🔹 Libraries Used
 
-* `feedparser` → RSS feed parsing
-* `requests` → HTTP requests
+* `feedparser` → RSS parsing
+* `requests` → API calls
 * `beautifulsoup4` → HTML parsing
-* `markdownify` → HTML to markdown
-* `openai` → AI processing
-* `sqlalchemy` → Database ORM
-* `psycopg2` → PostgreSQL support
-* `python-dotenv` → Environment management
+* `markdownify` → Content formatting
+* `groq` → AI inference
+* `sqlalchemy` → ORM
+* `psycopg2` → PostgreSQL
+* `python-dotenv` → Env management
 
 ---
 
@@ -78,40 +83,41 @@ It helps developers understand how to build **AI-powered automation systems**, i
 
 ```
 .
-├── main.py                 # Entry point of the application
-├── app/                   # Core application logic
-│   ├── daily_runner.py    # Main pipeline execution
-│   ├── ...                # Other modules (processing, scraping, AI)
+├── main.py                 # Entry point
+├── app/
+│   ├── daily_runner.py    # Pipeline controller
+│   ├── scraper.py         # News fetching
+│   ├── processor.py       # Cleaning logic
+│   ├── summarizer.py      # Groq AI integration
+│   ├── database.py        # DB handling
 │
-├── .env                   # Environment variables
-├── pyproject.toml         # Dependencies and project config
-├── README.md              # Documentation
+├── .env
+├── pyproject.toml
+├── README.md
 ```
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the Repository
+### 1️⃣ Clone Repo
 
-```
+```bash
 git clone <your-repo-url>
-cd <your-project-folder>
+cd <project-folder>
 ```
 
 ---
 
 ### 2️⃣ Install Dependencies
 
-Using pip:
-
-```
+```bash
 pip install -r requirements.txt
 ```
 
-OR (recommended for this project):
+OR (recommended):
 
-```
+```bash
 pip install uv
 uv sync
 ```
@@ -120,10 +126,10 @@ uv sync
 
 ### 3️⃣ Setup Environment Variables
 
-Create a `.env` file in root folder:
+Create `.env` file:
 
-```
-OPENAI_API_KEY=your_openai_api_key
+```env
+GROQ_API_KEY=your_groq_api_key
 
 APP_NAME=ai-news-aggregator
 ENV=development
@@ -140,54 +146,48 @@ TOP_NEWS_LIMIT=10
 
 ### 🔹 Default Run
 
-```
+```bash
 python main.py
 ```
 
----
-
 ### 🔹 Custom Run
 
-```
+```bash
 python main.py 24 10
 ```
 
-👉 24 = last 24 hours
-👉 10 = top 10 news articles
+👉 24 → last 24 hours
+👉 10 → top 10 articles
 
 ---
 
-## 🔄 How It Works (Flow)
+## 🔄 Pipeline Workflow
 
-1. Fetch news sources
+1. Fetch RSS feeds
 2. Extract article content
-3. Clean and preprocess text
-4. Send data to OpenAI
+3. Clean & preprocess text
+4. Send content to Groq API
 5. Generate summaries
 6. Filter top articles
-7. Return structured result
+7. Return structured JSON
 
 ---
 
-## 🤖 OpenAI Integration
+## ⚡ Groq AI Integration
 
-This project uses OpenAI API for:
+This project uses **Groq’s LLM API** for high-speed inference.
 
-* Text summarization
-* Content enhancement
-* Intelligent processing
-
-Example usage:
+### 🔹 Example Code
 
 ```python
-from openai import OpenAI
+from groq import Groq
 
-client = OpenAI(api_key="your_api_key")
+client = Groq(api_key="your_groq_api_key")
 
 response = client.chat.completions.create(
-    model="gpt-4.1-mini",
+    model="llama3-8b-8192",  # or mixtral / other Groq-supported models
     messages=[
-        {"role": "user", "content": "Summarize this news"}
+        {"role": "user", "content": "Summarize this news article"}
     ]
 )
 
@@ -198,13 +198,13 @@ print(response.choices[0].message.content)
 
 ## 📊 Example Output
 
-```
+```json
 {
   "success": true,
   "articles": [
     {
       "title": "AI is transforming industries",
-      "summary": "AI is rapidly changing how businesses operate..."
+      "summary": "AI is rapidly changing business operations by automating workflows..."
     }
   ]
 }
@@ -214,49 +214,13 @@ print(response.choices[0].message.content)
 
 ## 🚀 Future Improvements
 
-* 🌐 Web dashboard (React frontend)
-* 📩 Email/newsletter integration
-* 🔔 Real-time alerts
-* 🌍 Multi-language support
-* 📊 Analytics & trends
-* ☁️ Cloud deployment (Render / AWS)
+* 🌐 React Dashboard (Frontend)
+* 📩 Email newsletter automation
+* 🔔 Real-time alerts system
+* 🌍 Multi-language summaries
+* 📊 Trend analysis & insights
+* ☁️ Cloud deployment (AWS / Render)
 
 ---
 
-## ⚠️ Important Notes
 
-* Never commit `.env` file to GitHub
-* Always keep your API key secure
-* Use `.gitignore` to protect sensitive data
-
----
-
-## 🧑‍💻 Learning Outcomes
-
-By working on this project, you will learn:
-
-* How to build AI-powered pipelines
-* Data scraping and cleaning
-* API integration
-* Backend architecture
-* Real-world development workflow
-
----
-
-## 📄 License
-
-This project is intended for learning and development purposes.
-
----
-
-## ❤️ Credits
-
-Inspired by real-world AI workflows and automation systems.
-
----
-
-## 🔥 Final Note
-
-This project is not just a script — it's a **mini production-level AI system**.
-
-If you understand this fully, you're already ahead of most developers 🚀
